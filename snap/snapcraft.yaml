@@ -1,0 +1,20 @@
+name: gitter
+version: master
+summary: Where developers come to talk
+description: gitter desktop client
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+apps:
+  gitter:
+    command: sh -c \"cd $SNAP/lib/node_modules/gitter-desktop/ && npm start\"
+    plugs: [browser-support, network, network-bind, x11, opengl]
+
+parts:
+  desktop:
+    source: .
+    plugin: nodejs
+    node-engine: '6.10.0'
+    node-packages: [nw]
+    stage-packages: [libnss3, libgl1-mesa-glx, libgl1-mesa-dri]
